@@ -2,3 +2,5 @@
 Projekt szkolny
 ## Projekt szkolny na serwis ogłoszeniowy/sklep
 Na podanej stronie będzie można wystawiać ogłoszenia jak i kontaktować się z kupcami oraz ogłoszeniodawcami.
+
+[link do trello](https://trello.com/b/NwJu7gpP)
