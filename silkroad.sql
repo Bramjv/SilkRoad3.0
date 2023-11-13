@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 06, 2023 at 11:12 AM
--- Wersja serwera: 10.4.28-MariaDB
--- Wersja PHP: 8.0.28
+-- Generation Time: Nov 13, 2023 at 10:52 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,18 @@ USE `silkroad`;
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `order`
+-- Table structure for table `access_types`
+--
+
+CREATE TABLE `access_types` (
+  `id` tinyint(1) NOT NULL,
+  `access_type` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
 --
 
 CREATE TABLE `order` (
@@ -40,12 +51,13 @@ CREATE TABLE `order` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `ordered_product`
+-- Table structure for table `ordered_product`
 --
 
 CREATE TABLE `ordered_product` (
   `id` int(11) NOT NULL,
-  `order_id` int(24) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `id_seller` int(11) NOT NULL,
   `value` double(11,2) NOT NULL,
   `order_quantity` int(11) NOT NULL
@@ -54,40 +66,59 @@ CREATE TABLE `ordered_product` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `value` double(11,2) NOT NULL,
   `id_seller` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `description` text NOT NULL,
-  `condition` enum('new','used(in good condition)','used(in bad condition)','damaged') NOT NULL
+  `category_id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `condition` enum('new','used(in good condition)','damaged') NOT NULL,
+  `added_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `user`
+-- Table structure for table `product_category`
+--
+
+CREATE TABLE `product_category` (
+  `id` int(11) NOT NULL,
+  `product_category` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(36) NOT NULL,
   `login` varchar(64) NOT NULL,
-  `pass` varchar(21) NOT NULL,
-  `id_access` int(11) NOT NULL
+  `password` char(40) NOT NULL,
+  `id_access` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `order`
+-- Indexes for table `access_types`
+--
+ALTER TABLE `access_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
@@ -96,23 +127,31 @@ ALTER TABLE `order`
   ADD KEY `u_address` (`u_address`);
 
 --
--- Indeksy dla tabeli `ordered_product`
+-- Indexes for table `ordered_product`
 --
 ALTER TABLE `ordered_product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_seller` (`id_seller`),
-  ADD KEY `order_num` (`order_id`);
+  ADD KEY `order_num` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
--- Indeksy dla tabeli `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_seller` (`id_seller`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `added_by` (`added_by`),
+  ADD KEY `category_id` (`category_id`);
 
 --
--- Indeksy dla tabeli `user`
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -146,7 +185,37 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`id_buyer`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `ordered_product`
+--
+ALTER TABLE `ordered_product`
+  ADD CONSTRAINT `ordered_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `ordered_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`added_by`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_access`) REFERENCES `access_types` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
