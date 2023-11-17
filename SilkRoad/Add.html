@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Hurricane' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header id="header">
+
+        <div id="logo">
+            <img src="fin.png" id="l1">
+            <p><h2 style="font-family: 'Hurricane';">SilkRoad</h2></p>
+        </div>
+
+        <div id="p1">
+            <table id="t1">
+                <tr id="h">
+                    <td colspan="2"><b>You can pay with:</b></td>
+                </tr>
+                <tr>
+                    <td><p>Bitcone</p></td>
+                    <td><p>Etherium</p></td>
+                </tr>
+
+                <tr>
+                    <td><p>Litecoin</p></td>
+                    <td><p>Stellar</p></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="sc">
+            <input type="text" placeholder="If it exists we have it..." id="si">
+             <a href="#" id="sb">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+
+        <div id="cart">
+            <img src="cart.png" id="c1">
+        </div>
+
+     
+
+        <div id="lr">
+<button type="submit" id="b1" onclick="document.getElementById('popup').style.display = 'block'">Login<div><img src="login.png"></div> </button>
+<br><br>
+<button type="submit" id="b2" onclick="document.getElementById('popup-register').style.display = 'block'">Register<div><img src="register.png" ></div></button>
+        </div>
+    </header>
+
+    <div id="popup" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="document.getElementById('popup').style.display = 'none'">&times;</span>
+
+            <form method="post" action="login.php" class="login">
+
+            <h1>Sign in</h1>
+
+            <input type="text" name="username" placeholder="Username or Email" required><br><br>
+
+            <input type="password" name="password" placeholder="Password" required><br><br>
+
+            <input type="submit">
+                
+            </form>
+            
+        </div>
+    </div>
+
+    <div id="popup-register" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="document.getElementById('popup-register').style.display = 'none'">&times;</span>
+
+            <form method="post" action="register.php" id="rej">
+
+                <h1>Sign up</h1>
+
+                <input type="text" name="Imie" placeholder="Name" required><br><br>
+                <input type="text" name="Nazwisko" placeholder="Surname" required><br><br>
+                <input type="text" name="Email" placeholder="Email"><br><br>
+                <input type="text" name="numer_telefonu" placeholder="Phone number"><br><br>
+                <input type="password" name="password" placeholder="Password" required><br><br>
+                <input type="password" name="password2" placeholder="Repeat Password"><br><br>
+
+                <button type="submit">Zarejestruj</button><br><br>
+            </form>
+        </div>
+    </div>
+
+    <div id="add-product">
+        <fieldset>
+    <legend>dodawanie produktu</legend>
+        <div id="add-product-content">
+            <lable for="name" id="l1">Name</lable><br>
+            <input type="text" name="name" required><br><br>
+
+
+            <label for="username" id="l1">Username</label><br>
+            <input type="text" name="username" required><br><br>
+
+            <label for="username" id="l1">Username</label><br>
+            <input type="text" name="username" required><br><br>
+
+            <label for="condition" >Condition</label><br>
+            <select option name="condition">
+                <option>Coś z php</option>
+                <option>Coś z php</option>
+                <option>Coś z php</option>
+            </select><br><br>
+
+            <label for="Categories">Categories</label><br>
+            <select option name="Categories">
+                <option>Coś z php</option>
+                <option>Coś z php</option>
+                <option>Coś z php</option>
+            </select><br><br>
+
+            <label for="description">Description</label><br>
+            <textarea name="description"></textarea><br><br>
+
+            <button type="submit"> Add</button>
+
+        </div>
+        </fieldset>
+    </div>
+    
+
+    
+</body>
+</html>
