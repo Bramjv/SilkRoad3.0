@@ -64,27 +64,35 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
+ <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Edit Product</h1>
-
+<div id="edit_product">
+        <div id="edit_product_content">
+<fieldset>
+    <legend><h4>Edit Product</h4></legend>
+    
     <form action="edit_product.php?id=<?php echo $productID; ?>" method="post">
-        <label for="product_name">Product Name:</label>
-        <input type="text" name="product_name" value="<?php echo $rowProduct['product_name']; ?>" required>
 
-        <label for="description">Description:</label>
-        <textarea name="description" required><?php echo $rowProduct['description']; ?></textarea>
+        <label for="product_name">Product Name:</label><br>
+        <input id="it" type="text" name="product_name" value="<?php echo $rowProduct['product_name']; ?>" required><br><br>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" value="<?php echo $rowProduct['quantity']; ?>" required>
+        <label for="description">Description:</label><br>
+        <textarea id="it" name="description" required><?php echo $rowProduct['description']; ?></textarea><br><br>
 
-        <label for="price">Price:</label>
-        <input type="number" name="price" value="<?php echo $rowProduct['price']; ?>" required>
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" name="quantity" value="<?php echo $rowProduct['quantity']; ?>" required><br><br>
 
-        <input type="submit" value="Update Product">
+        <label for="price">Price:</label><br>
+        <input type="number" name="price" value="<?php echo $rowProduct['price']; ?>" required><br><br>
+
+        <input type="submit" value="Update Product" id="up"><br>
     </form>
 
     <br>
     <a href="user_panel.php">Back to User Panel</a>
+</fieldset>
+</div>
+    </div>
 </body>
 </html>
