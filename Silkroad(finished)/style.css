@@ -55,7 +55,7 @@ img{
                 -4px -4px 6px rgba(116, 125, 136, 0.2),
                 inset -4px -4px 6px 0 rgba(0, 0, 0, 0.2);
                 margin-left: 20rem;
-                
+                background: none;
                 float: left;
 }
 
@@ -68,6 +68,13 @@ img{
     width: 36rem;
    
 }
+
+#sb{
+    background: none;
+    outline: none;
+    border: none;
+}
+
 #batt{
     margin-top: -15px;
 }
