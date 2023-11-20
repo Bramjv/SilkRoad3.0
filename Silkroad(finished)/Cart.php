@@ -178,7 +178,7 @@ if (isset($_POST['remove_from_cart'])) {
             <?php echo number_format($totalPrice, 2); ?>
             </span>
             &nbsp
-            <button>buy</button>
+            <a href="transaction.html"><button>buy</button></a>
             </div>
             </div>
         </div>

@@ -121,10 +121,10 @@ while ($rowCondition = $resultConditions->fetch_assoc()) {
         <textarea id="it" name="description" required><?php echo $rowProduct['description']; ?></textarea><br><br>
 
         <label for="quantity">Quantity:</label><br>
-        <input type="number" name="quantity" value="<?php echo $rowProduct['quantity']; ?>" required min=1><br><br>
+        <input type="number" name="quantity" value="<?php echo $rowProduct['quantity']; ?>" required><br><br>
 
         <label for="price">Price:</label><br>
-        <input id="it" type="number" name="price" value="<?php echo $rowProduct['price']; ?>" required min=0.01><br><br>
+        <input id="it" type="text" name="price" value="<?php echo $rowProduct['price']; ?>" required><br><br>
 
         <label for="condition">Condition:</label><br>
         <select id="it" name="condition" value="<?php echo $rowProduct['condition']; ?>" required>
@@ -144,6 +144,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
     $condition = $_POST['condition'];
+
+    if ($price < 0.01 || $quantity < 1) {
+        echo "Error updating product: " . $conn->error;
+        exit();
+    }
 
     $sqlUpdateProduct = "UPDATE auction_items SET 
     product_name = ?, 
