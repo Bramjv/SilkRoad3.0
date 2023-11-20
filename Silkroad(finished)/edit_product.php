@@ -124,10 +124,10 @@ while ($rowCondition = $resultConditions->fetch_assoc()) {
         <input type="number" name="quantity" value="<?php echo $rowProduct['quantity']; ?>" required min=1><br><br>
 
         <label for="price">Price:</label><br>
-        <input type="number" name="price" value="<?php echo $rowProduct['price']; ?>" required min=0.01><br><br>
+        <input id="it" type="number" name="price" value="<?php echo $rowProduct['price']; ?>" required min=0.01><br><br>
 
         <label for="condition">Condition:</label><br>
-        <select name="condition" value="<?php echo $rowProduct['condition']; ?>" required>
+        <select id="it" name="condition" value="<?php echo $rowProduct['condition']; ?>" required>
                 <?php
                     foreach ($conditions as $condition) {
                         echo "<option value='{$condition['id']}'>{$condition['condition']}</option>";
